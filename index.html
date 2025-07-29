@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Server Setups</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a162a;
+            --text-color: #eaf3ff;
+            --accent-color: #3b7bff;
+            --card-bg: #162a4d;
+            --hover-color: #5e9cff;
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+        .glow {
+            position: fixed;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,123,255,0.13) 0%, rgba(59,123,255,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .glow-1 {
+            top: 18%;
+            left: 8%;
+            animation: float-glow 8s ease-in-out infinite;
+        }
+        .glow-2 {
+            bottom: 12%;
+            right: 8%;
+            animation: float-glow 10s ease-in-out infinite 2s;
+        }
+        @keyframes float-glow {
+            0%, 100% { transform: translate(0, 0);}
+            25% { transform: translate(20px, 20px);}
+            50% { transform: translate(0, 40px);}
+            75% { transform: translate(-20px, 20px);}
+        }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5em 1em 2em 1em;
+        }
+        h1, h2, h3 {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 0.7em;
+            letter-spacing: 0.5px;
+        }
+        h2, h3 {
+            font-size: 1.3em;
+        }
+        .info-card,
+        .service-card,
+        .contact {
+            background: linear-gradient(135deg, #1a2a4d 0%, #3b7bff 100%);
+            border-radius: 22px;
+            box-shadow: 0 6px 32px #0008;
+            color: #eaf3ff;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card {
+            padding: 2.5em 1.7em;
+            margin-bottom: 2em;
+        }
+        .info-card h2 {
+            color: #fff !important;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+            text-shadow: 0 2px 12px #3b7bff88;
+        }
+        .info-card h3 {
+            color: #eaf3ff;
+            font-size: 1.15em;
+            font-weight: 500;
+            margin-bottom: 1em;
+            text-shadow: 0 1px 6px #0004;
+        }
+        .screenshot-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2em;
+            margin-bottom: 2em;
+        }
+        .screenshot-container.reverse {
+            flex-direction: row-reverse;
+        }
+        .screenshot {
+            width: 500px;
+            max-width: 98vw;
+            transform: rotateY(12deg) rotateX(4deg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 0;
+            /* Keine Animation mehr */
+            animation: none;
+        }
+        @media (max-width: 900px) {
+            .screenshot {
+                width: 98vw;
+                max-width: 98vw;
+                min-width: 0;
+                margin: 0 auto 1em auto;
+                border-radius: 10px;
+                /* Auch auf Mobile fest gebogen */
+                transform: rotateY(12deg) rotateX(4deg);
+            }
+        }
+        .screenshot-text {
+            flex: 1;
+            min-width: 220px;
+        }
+        .services {
+            margin-bottom: 2em;
+        }
+        .price-cards {
+            display: flex;
+            gap: 1.2em;
+            flex-wrap: wrap;
+            margin-bottom: 2em;
+        }
+        .service-card {
+            padding: 1.5em 1.2em;
+            margin-bottom: 1em;
+            max-width: 300px;
+            min-width: 220px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .service-card.best-value {
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 6px 32px #3b7bff33;
+        }
+        .service-card h3 {
+            color: #fff !important;
+            margin-bottom: 0.5em;
+            font-size: 1.15em;
+            font-weight: 700;
+            text-shadow: 0 2px 12px #3b7bff88;
+        }
+        .service-card .price {
+            color: var(--hover-color);
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0.7em 0 0.7em 0;
+        }
+        .button, .view-more-button, .scroll-button {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 0.7em 1.2em;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.7em;
+            box-shadow: 0 2px 8px #0003;
+            transition: background 0.18s, color 0.18s;
+            text-decoration: none;
+            display: inline-block;
+           
+        }
+        .button:hover, .view-more-button:hover, .scroll-button:hover {
+            background: var(--hover-color);
+            color: #fff;
+        }
+        .scroll-button {
+            background: linear-gradient(90deg, #3b7bff 60%, #5e9cff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8em 1.4em;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1.2em;
+            box-shadow: 0 2px 12px #0003;
+            transition: background 0.18s, color 0.18s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .scroll-button:hover {
+            background: linear-gradient(90deg, #5e9cff 60%, #3b7bff 100%);
+            color: #fff;
+        }
+        .review-slider {
+            display: flex;
+            gap: 1em;
+            flex-wrap: wrap;
+            margin-bottom: 1.5em;
+        }
+        .review-card {
+            background: linear-gradient(135deg, #1a2a4d 0%, #3b7bff 100%);
+            color: #eaf3ff;
+            border-radius: 10px;
+            padding: 0.8em 1.2em;
+            font-size: 1em;
+            box-shadow: 0 2px 12px #0003;
+            margin-bottom: 0.5em;
+            min-width: 120px;
+            flex: 1;
+            border: 1px solid #3b7bff44;
+            text-shadow: 0 1px 6px #0004;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .review-card:hover {
+            box-shadow: 0 4px 24px #3b7bff88;
+            background: linear-gradient(135deg, #3b7bff 0%, #5e9cff 100%);
+        }
+        .contact {
+            padding: 2em 1.5em;
+            margin-bottom: 2em;
+            text-align: center;
+        }
+        .contact h2 {
+            color: #fff !important;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+            text-shadow: 0 2px 12px #3b7bff88;
+        }
+        .contact h3 {
+            color: #eaf3ff;
+            font-size: 1.15em;
+            font-weight: 500;
+            margin-bottom: 1em;
+            text-shadow: 0 1px 6px #0004;
+        }
+        .contact-images {
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.2em;
+        }
+        .contact-images img {
+            max-width: 80px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #0004;
+        }
+        .space1 {
+            margin-bottom: 1em;
+        }
+        .space {
+            margin-bottom: 1.2em;
+        }
+        @media (max-width: 900px) {
+            main {
+                padding: 1.2em 0.3em;
+            }
+            .screenshot-container {
+                flex-direction: column;
+                gap: 1em;
+            }
+            .screenshot-container.reverse {
+                flex-direction: column;
+            }
+            .screenshot {
+                width: 98vw;
+                max-width: 98vw;
+                min-width: 0;
+                margin: 0 auto 1em auto;
+                border-radius: 10px;
+                /* Auch auf Mobile fest gebogen */
+                transform: rotateY(12deg) rotateX(4deg);
+            }
+            .price-cards {
+                flex-direction: column;
+                gap: 1em;
+            }
+            .service-card {
+                max-width: 98vw;
+                width: 98vw;
+                margin: 0 auto 1em auto;
+            }
+            .review-slider {
+                flex-direction: column;
+                gap: 0.7em;
+            }
+            .contact-images {
+                flex-direction: column;
+                gap: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <main id="main-content">
+        <section class="info-card">
+            <h2 >About Us</h2>
+            <h3>Hi, we are passionate Discord server creators since 2023. We love building organized, professional, and user-friendly servers for all kinds of communities. Whether you need a business network or a fun community space, we are here to bring your vision to life with custom setups, bots, and full support!</h3>
+            <br><br>
+            <h2>Past Work</h2>
+            <h3>In our server creation journey since 2023, we have built all types of Discord servers — from professional business hubs to vibrant community spaces. We set up everything you need: custom channels, roles, and permissions, as well as powerful bots for ticket systems, auto roles, moderation, welcome messages, and more. We handle every detail to create a smooth, ready-to-use server tailored to your needs.</h3>
+            <button onclick="scrollToPrices()" class="scroll-button">See Prices</button>
+        </section>
+
+        <section class="screenshot-container reverse">
+            <img class="screenshot" src="Screenshot 2025-04-29 201030.png" alt="Another Screenshot of Discord Server">
+            <div class="screenshot-text">
+                <h1>Effortless Server Management</h1>
+                <p>With our advanced setups, managing your Discord server has never been easier. From automated moderation to custom roles and permissions, we provide everything you need to keep your community running smoothly.</p>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <h2>Our Prices</h2>
+            <br>
+            <div class="price-cards">
+                <div class="service-card">
+                    <h3>Basic Setup</h3>
+                    <p>Includes a clean server template with organized channels and basic roles.</p>
+                    <p class="price">$5</p>
+                    <a href="#contact" class="button">Contact Us</a>
+                </div>
+                <div class="service-card best-value">
+                    <h3>Setup with Bots</h3>
+                    <p>Includes a server template with bots like Ticket, Moderation etc... And everything from basic.</p>
+                    <p class="price">$10</p>
+                    <a href="#contact" class="button">Contact Us</a>
+                </div>
+                <div class="service-card">
+                    <h3>Advanced Setup</h3>
+                    <p>Includes advanced server customization, bots, and unique features tailored to your needs. And everything from the others.</p>
+                    <p class="price">$15</p>
+                    <a href="#contact" class="button">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="screenshot-container">
+            <div class="screenshot-text">
+                <h1>Launch Your Discord Server Instantly</h1>
+                <p>We provide professional setups with custom channels, bots, and everything you need to get started. Save time and focus on building your community while we handle the technical details.</p>
+            </div>
+            <img class="screenshot" src="Screenshot 2025-04-29 180952.png" alt="Screenshot of Discord Server">
+        </section>
+
+        <section class="services">
+            <h1 class="space1">Why you should choose us?</h1>
+            <div class="review-slider">
+                <div class="review-card">⭐⭐⭐⭐⭐ "Amazing service!"</div>
+                <div class="review-card">⭐⭐⭐⭐⭐ "Set up a server for me, quick and easy with no problems"</div>
+                <div class="review-card">⭐⭐⭐⭐⭐ "Fast and reliable."</div>
+                <div class="review-card">⭐⭐⭐⭐⭐ "easy Process."</div>
+                <div class="review-card">⭐⭐⭐⭐⭐ "Good Discord setup!"</div>
+            </div>
+            <a href="https://oguser.com/geigi" class="view-more-button" target="_blank">See more Feedback!</a>
+        </section>
+
+        <section class="screenshot-container">
+            <div class="screenshot-text">
+                <h1>Trusted by 100+ Happy Clients</h1>
+                <p>Join a growing list of satisfied customers who’ve successfully launched their communities with our expert Discord server setups. Our clients value speed, quality, and personalized support — and we deliver on all three.</p>
+            </div>
+            <img class="screenshot" src="server5.png" alt="Screenshot of Discord Server">
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact us today!</h2>
+            <h3 class="space">Ready to get started? Contact us on Discord to discuss your server setup!</h3>
+            <div class="contact-images">
+                <a href="https://oguser.com/geigi" target="_blank"><img src="0x0.png" alt="OGU"></a>
+                <a href="https://discord.com/users/463953200559685632" target="_blank"><img src="discord.png" alt="Discord"></a>
+            </div>
+            <p style="margin-top:1.2em;">&copy; 2025 DCServer.dev, All rights reserved.</p>
+        </section>
+    </main>
+
+    <script>
+        function scrollToMain() {
+            document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+
+        }
+        function scrollToPrices() {
+        document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>
