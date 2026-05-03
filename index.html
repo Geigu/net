@@ -1,202 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DCServer.dev – Professional Discord Server Setups</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCServer.dev – Professional Discord Server Setups</title>
+  <meta name="description" content="Professional Discord server setups since 2023. Custom channels, roles, bots, and ready-to-use servers for communities or businesses.">
+  <meta name="keywords" content="Discord, Discord server setup, Discord bots, community server, business server, custom Discord setup">
+  <meta name="author" content="DCServer.dev">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="DCServer.dev – Professional Discord Server Setups">
+  <meta property="og:description" content="Custom Discord server setups including channels, roles, and bots. Ready-to-use servers for communities and businesses.">
+  <meta property="og:url" content="https://dcserver.dev/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="icon3 (1).png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Mulish:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- SEO Meta -->
-<meta name="description" content="Professional Discord server setups since 2023. Custom channels, roles, bots, and ready-to-use servers for communities or businesses.">
-<meta name="keywords" content="Discord, Discord server setup, Discord bots, community server, business server, custom Discord setup">
-<meta name="author" content="DCServer.dev">
-<meta name="robots" content="index, follow">
+    :root {
+      --bg: #080c12;
+      --surface: #0e1520;
+      --surface2: #141e2e;
+      --border: rgba(255,255,255,0.07);
+      --blue: #3b82f6;
+      --blue-dim: rgba(59,130,246,0.15);
+      --text: #f0f4ff;
+      --muted: #6b7fa3;
+      --accent: #3b82f6;
+    }
 
-<!-- Open Graph / Social -->
-<meta property="og:title" content="DCServer.dev – Professional Discord Server Setups">
-<meta property="og:description" content="Custom Discord server setups including channels, roles, and bots. Ready-to-use servers for communities and businesses.">
-<meta property="og:image" content="https://example.com/og-image.png">
-<meta property="og:url" content="https://dcserver.dev/">
-<meta property="og:type" content="website">
+    html { scroll-behavior: smooth; }
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DCServer.dev – Professional Discord Server Setups">
-<meta name="twitter:description" content="Custom Discord server setups including channels, roles, and bots. Ready-to-use servers for communities and businesses.">
-<meta name="twitter:image" content="https://example.com/og-image.png">
-<meta name="twitter:site" content="@DCServerDev">
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Mulish', sans-serif;
+      overflow-x: hidden;
+    }
 
-<!-- Favicon -->
-<link rel="icon" href="icon3 (1).png" type="image/png">
+    
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
 
-<!-- Fonts & TailwindCSS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+  
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+      background: rgba(8,12,18,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 0.08em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--blue); color: #fff !important;
+      padding: 6px 16px; border-radius: 6px;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; color: #fff !important; }
 
-<!-- AOS for scroll animations -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    section { position: relative; z-index: 1; }
 
-<style>
-body {
-    font-family: 'Inter', sans-serif;
-    background: #0a162a;
-    color: #eaf3ff;
-}
-.glow {
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,123,255,0.2) 0%, rgba(59,123,255,0) 70%);
-  pointer-events: none;
-  z-index: -1;
-  animation: float 10s ease-in-out infinite;
-}
-.glow-2 { animation-delay: 2s; }
-@keyframes float {
-  0%,100% { transform: translate(0,0);}
-  25% { transform: translate(30px,20px);}
-  50% { transform: translate(0,40px);}
-  75% { transform: translate(-30px,20px);}
-}
-</style>
+ 
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 2rem 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(59,130,246,0.06) 0%, transparent 60%);
+    }
+    .hero-lines {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--blue); border: 1px solid rgba(59,130,246,0.3);
+      padding: 5px 14px; border-radius: 99px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.9; letter-spacing: 0.02em;
+      color: var(--text);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-title span { color: var(--blue); }
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; max-width: 520px; margin-inline: auto;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 13px 32px; border-radius: 8px;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text);
+      padding: 13px 32px; border-radius: 8px;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    .split {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px 2rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+    .split-img {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .split-img img { width: 100%; display: block; }
+    .split-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .split-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem; line-height: 1;
+      letter-spacing: 0.03em; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .split-text { color: var(--muted); font-size: 0.92rem; line-height: 1.8; }
+
+    /* ── Pricing ── */
+    .pricing-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px 2rem; text-align: center;
+    }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem; letter-spacing: 0.03em;
+      color: var(--text); margin-bottom: 3rem;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; gap: 12px;
+      text-align: left; transition: all 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .price-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .price-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .price-card:hover::before { opacity: 1; }
+    .price-card.featured {
+      border-color: rgba(59,130,246,0.4);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(59,130,246,0.05) 100%);
+    }
+    .price-card.featured::before { opacity: 1; }
+    .featured-tag {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--blue); color: #fff;
+      padding: 3px 8px; border-radius: 99px;
+    }
+    .price-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    .price-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--blue); line-height: 1;
+    }
+    .price-amount span { font-family: 'Mulish', sans-serif; font-size: 1rem; color: var(--muted); }
+    .price-btn {
+      display: block; text-align: center;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text); padding: 10px;
+      border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .price-btn:hover, .price-card.featured .price-btn {
+      background: var(--blue); border-color: var(--blue); color: #fff;
+    }
+
+   
+    .reviews-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px 2rem; text-align: center;
+    }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 2rem;
+    }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+      text-align: left; transition: border-color 0.2s;
+    }
+    .review-card:hover { border-color: rgba(59,130,246,0.3); }
+    .review-stars { color: #fbbf24; font-size: 0.8rem; margin-bottom: 8px; }
+    .review-text { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+   
+    .clients-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 2rem 100px;
+    }
+
+    
+    .contact-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 2rem 100px;
+    }
+    .contact-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 4rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-inner::before {
+      content: ''; position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+    .contact-glow {
+      position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 200px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; letter-spacing: 0.03em;
+      color: var(--text); margin-bottom: 8px;
+      position: relative;
+    }
+    .contact-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 2rem; position: relative; }
+    .contact-icons {
+      display: flex; gap: 16px; justify-content: center;
+      position: relative;
+    }
+    .contact-icon-link img {
+      width: 56px; border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .contact-icon-link:hover img { border-color: var(--blue); transform: translateY(-2px); }
+    .footer-copy { color: var(--muted); font-size: 0.75rem; margin-top: 2rem; position: relative; }
+
+    
+    .divider {
+      max-width: 1100px; margin: 0 auto;
+      height: 1px; background: var(--border);
+      position: relative; z-index: 1;
+    }
+
+   
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .split { grid-template-columns: 1fr; gap: 32px; padding: 60px 1.5rem; }
+      .split.reverse { direction: ltr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { padding: 2.5rem 1.5rem; }
+      .hero-title { font-size: clamp(3.5rem, 16vw, 6rem); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Background Glows -->
-<div class="glow top-16 left-8"></div>
-<div class="glow glow-2 bottom-16 right-12"></div>
+<nav>
+  <a href="/" class="nav-logo">DC<span>Server</span>.dev</a>
+  <div class="nav-links">
+    <a href="#services">Pricing</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
 
-<main class="max-w-6xl mx-auto px-6 py-12 space-y-32">
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Discord Server Setups Since 2023</div>
+    <h1 class="hero-title">DC<span>Server</span><br>.dev</h1>
+    <p class="hero-sub">We build organized, professional, and user-friendly Discord servers for communities and businesses. Custom channels, roles, bots — fully ready to launch.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">See Prices</button>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
 
-  <!-- Hero / About -->
-  <section class="relative text-center py-24 md:py-32 overflow-hidden bg-gradient-to-br from-[#0a162a] to-[#051021]">
-    <!-- Neon Glow Background Circles -->
-    <div class="absolute top-10 left-1/4 w-56 md:w-72 h-56 md:h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-10 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+<div class="divider"></div>
 
-    <div class="relative z-10 space-y-6 max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
-      <h1 class="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#3b7bff] to-[#5e9cff] drop-shadow-2xl">
-        DCServer.dev
-      </h1>
-      <div class="h-1 w-24 md:w-32 mx-auto bg-gradient-to-r from-[#3b7bff] to-[#5e9cff] rounded-full animate-pulse"></div>
-      <p class="text-base md:text-lg text-[#eaf3ffcc] leading-relaxed mt-4">
-        Hi, we are passionate Discord server creators since 2023. We love building organized, professional, and user-friendly servers for all kinds of communities. Whether you need a business network or a fun community space, we are here to bring your vision to life with custom setups, bots, and full support!
-      </p>
-      <h2 class="text-2xl md:text-4xl font-bold text-[#3b7bff] mt-6">Past Work</h2>
-      <p class="text-[#eaf3ffcc] leading-relaxed">
-        In our server creation journey since 2023, we have built all types of Discord servers — from professional business hubs to vibrant community spaces. We set up everything you need: custom channels, roles, and permissions, as well as powerful bots for ticket systems, auto roles, moderation, welcome messages, and more. We handle every detail to create a smooth, ready-to-use server tailored to your needs.
-      </p>
-      <div class="mt-6 md:mt-8 flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
-        <button onclick="scrollToPrices()" class="bg-gradient-to-r from-[#3b7bff] to-[#5e9cff] hover:from-[#5e9cff] hover:to-[#3b7bff] text-white font-semibold py-3 px-8 rounded-xl shadow-xl transition-all transform hover:scale-105">
-          See Prices
-        </button>
-        <a href="#contact" class="bg-transparent border-2 border-[#3b7bff] hover:bg-[#3b7bff] hover:text-white text-[#3b7bff] font-semibold py-3 px-8 rounded-xl shadow-lg transition-all transform hover:scale-105">
-          Contact Us
+<section>
+  <div class="split reveal">
+    <div class="split-img">
+      <img src="Screenshot 2025-04-29 201030.png" alt="Discord Setup">
+    </div>
+    <div>
+      <div class="split-label">What We Do</div>
+      <h2 class="split-title">Effortless Server Management</h2>
+      <p class="split-text">Take full control of your Discord community with ease. Our advanced server setups include automated moderation, custom roles and permissions, organized channels, and integrated bots for tickets, welcome messages, and more. We provide all the tools and guidance you need to keep your server running smoothly.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="services">
+  <div class="pricing-section reveal">
+    <div class="section-label">Transparent Pricing</div>
+    <h2 class="section-title">Our Prices</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Basic Setup</div>
+        <div class="price-desc">Clean server template with organized channels and basic roles. Perfect for getting started fast.</div>
+        <div class="price-amount">$5 <span>one-time</span></div>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-tag">Popular</div>
+        <div class="price-name">Setup with Bots</div>
+        <div class="price-desc">Server with Ticket, Moderation, and Utility bots — plus everything from Basic Setup.</div>
+        <div class="price-amount">$10 <span>one-time</span></div>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Advanced Setup</div>
+        <div class="price-desc">Custom server features, bots, advanced roles, and everything from previous packages.</div>
+        <div class="price-amount">$15 <span>one-time</span></div>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="split reverse reveal">
+    <div class="split-img">
+      <img src="Screenshot 2025-04-29 180952.png" alt="Discord Setup">
+    </div>
+    <div>
+      <div class="split-label">Ready to Launch</div>
+      <h2 class="split-title">Launch Your Server Instantly</h2>
+      <p class="split-text">Get a fully customized Discord server tailored to your community or business. We handle everything — from creating organized channels and assigning roles to setting up powerful bots for moderation, tickets, and automation. Focus on growing your community while we handle the technical details.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="reviews">
+  <div class="reviews-section reveal">
+    <div class="section-label">Social Proof</div>
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Amazing service!"</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Quick and easy setup"</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Reliable and professional"</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Good Discord setup!"</div>
+      </div>
+    </div>
+    <a href="https://oguser.com/geigi" target="_blank" class="btn-primary" style="display:inline-block;">See More Feedback</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="split reveal">
+    <div class="split-img">
+      <img src="server5.png" alt="Trusted by clients">
+    </div>
+    <div>
+      <div class="split-label">Track Record</div>
+      <h2 class="split-title">Trusted by 100+ Clients</h2>
+      <p class="split-text">Our clients trust us to create high-quality Discord servers fully customized to their needs. They appreciate our fast turnaround times, meticulous attention to detail, and dedicated support throughout the entire setup process. From initial consultation to final launch, we ensure a seamless experience.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="contact-section reveal">
+    <div class="contact-inner">
+      <div class="contact-glow"></div>
+      <h2 class="contact-title">Contact Us Today</h2>
+      <p class="contact-sub">Ready to get started? Reach out on Discord to discuss your server setup.</p>
+      <div class="contact-icons">
+        <a href="https://oguser.com/geigi" target="_blank" class="contact-icon-link">
+          <img src="0x0.png" alt="OGU">
+        </a>
+        <a href="https://discord.com/users/463953200559685632" target="_blank" class="contact-icon-link">
+          <img src="discord.png" alt="Discord">
         </a>
       </div>
+      <p class="footer-copy">© 2025 DCServer.dev — All rights reserved.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Screenshots / Features -->
-  <section class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
-    <img src="Screenshot 2025-04-29 201030.png" alt="Discord Screenshot" class="w-full md:w-1/2 rounded-3xl shadow-2xl" data-aos="fade-left" data-aos-duration="1000">
-    <div class="md:w-1/2 space-y-4" data-aos="fade-right" data-aos-duration="1000">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#5e9cff]">Effortless Server Management</h2>
-      <p class="text-[#eaf3ffcc] text-base md:text-lg leading-relaxed">
-        Take full control of your Discord community with ease. Our advanced server setups include automated moderation, custom roles and permissions, organized channels, and integrated bots for tickets, welcome messages, and more. We provide all the tools and guidance you need to keep your server running smoothly, letting you focus on engaging your members and growing your community.
-      </p>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="services" class="space-y-10 text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-[#3b7bff]" data-aos="fade-up" data-aos-duration="1000">Our Prices</h2>
-    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mt-6">
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] rounded-3xl p-6 md:p-8 w-full sm:w-64 md:w-72 flex flex-col space-y-4 shadow-lg hover:shadow-2xl transition" data-aos="zoom-in" data-aos-duration="1000">
-        <h3 class="text-lg md:text-xl font-bold text-white">Basic Setup</h3>
-        <p class="text-[#eaf3ffcc] text-sm md:text-base">Clean server template with organized channels and basic roles.</p>
-        <p class="text-lg md:text-xl font-bold text-[#5e9cff]">$5</p>
-        <a href="#contact" class="mt-auto bg-[#3b7bff] hover:bg-[#5e9cff] text-white py-2 px-4 rounded-lg font-semibold transition">Contact</a>
-      </div>
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] border-2 border-[#3b7bff] rounded-3xl p-6 md:p-8 w-full sm:w-64 md:w-72 flex flex-col space-y-4 shadow-lg hover:shadow-2xl transition" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-        <h3 class="text-lg md:text-xl font-bold text-white">Setup with Bots</h3>
-        <p class="text-[#eaf3ffcc] text-sm md:text-base">Server with Ticket, Moderation, and Utility bots + everything from Basic Setup.</p>
-        <p class="text-lg md:text-xl font-bold text-[#5e9cff]">$10</p>
-        <a href="#contact" class="mt-auto bg-[#3b7bff] hover:bg-[#5e9cff] text-white py-2 px-4 rounded-lg font-semibold transition">Contact</a>
-      </div>
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] rounded-3xl p-6 md:p-8 w-full sm:w-64 md:w-72 flex flex-col space-y-4 shadow-lg hover:shadow-2xl transition" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
-        <h3 class="text-lg md:text-xl font-bold text-white">Advanced Setup</h3>
-        <p class="text-[#eaf3ffcc] text-sm md:text-base">Custom server features, bots, advanced roles, and everything from previous packages.</p>
-        <p class="text-lg md:text-xl font-bold text-[#5e9cff]">$15</p>
-        <a href="#contact" class="mt-auto bg-[#3b7bff] hover:bg-[#5e9cff] text-white py-2 px-4 rounded-lg font-semibold transition">Contact</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Launch / More Features -->
-  <section class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-    <div class="md:w-1/2 space-y-4" data-aos="fade-right" data-aos-duration="1000">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#5e9cff]">Launch Your Discord Server Instantly</h2>
-      <p class="text-[#eaf3ffcc] text-base md:text-lg leading-relaxed">
-        Get a fully customized Discord server tailored to your community or business. We handle everything — from creating organized channels and assigning roles to setting up powerful bots for moderation, tickets, and automation. Focus on growing and engaging your members while we take care of all the technical details, ensuring a smooth, ready-to-use server from day one.
-      </p>
-    </div>
-    <img src="Screenshot 2025-04-29 180952.png" alt="Discord Screenshot" class="w-full md:w-1/2 rounded-3xl shadow-2xl" data-aos="fade-left" data-aos-duration="1000">
-  </section>
-
-  <!-- Reviews -->
-  <section class="space-y-6 text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-[#3b7bff]" data-aos="fade-up" data-aos-duration="1000">Why Choose Us?</h2>
-    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mt-6">
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] p-6 rounded-2xl shadow-lg text-[#eaf3ffcc] hover:shadow-2xl transition w-full sm:w-64 md:w-64" data-aos="fade-up" data-aos-duration="1000">⭐⭐⭐⭐⭐ "Amazing service!"</div>
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] p-6 rounded-2xl shadow-lg text-[#eaf3ffcc] hover:shadow-2xl transition w-full sm:w-64 md:w-64" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">⭐⭐⭐⭐⭐ "Quick and easy setup"</div>
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] p-6 rounded-2xl shadow-lg text-[#eaf3ffcc] hover:shadow-2xl transition w-full sm:w-64 md:w-64" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">⭐⭐⭐⭐⭐ "Reliable and professional"</div>
-      
-      <div class="bg-gradient-to-tr from-[#1a2a4d] to-[#3b7bff] p-6 rounded-2xl shadow-lg text-[#eaf3ffcc] hover:shadow-2xl transition w-full sm:w-64 md:w-64" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">⭐⭐⭐⭐⭐ "Good Discord setup!"</div>
-    </div>
-    <a href="https://oguser.com/geigi" target="_blank" class="inline-block mt-4 bg-gradient-to-r from-[#3b7bff] to-[#5e9cff] hover:from-[#5e9cff] hover:to-[#3b7bff] text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition" data-aos="fade-up" data-aos-duration="1000">See More Feedback</a>
-  </section>
-
-  <!-- Clients -->
-  <section class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-    <div class="md:w-1/2 space-y-4" data-aos="fade-right" data-aos-duration="1000">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#5e9cff]">Trusted by 100+ Clients</h2>
-      <p class="text-[#eaf3ffcc] text-base md:text-lg leading-relaxed">
-       Our clients trust us to create high-quality Discord servers that are fully customized to their needs. They appreciate our fast turnaround times, meticulous attention to detail, and dedicated personalized support throughout the entire setup process. From initial consultation to final launch, we ensure a seamless experience that empowers communities and businesses to thrive online.
-      </p>
-    </div>
-    <img src="server5.png" alt="Discord Screenshot" class="w-full md:w-1/2 rounded-3xl shadow-2xl" data-aos="fade-left" data-aos-duration="1000">
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="bg-gradient-to-r from-[#162a4d] to-[#3b7bff] rounded-3xl shadow-xl p-8 md:p-12 text-center space-y-6" data-aos="fade-up" data-aos-duration="1000">
-    <h2 class="text-2xl md:text-4xl font-extrabold text-white drop-shadow-lg">Contact Us Today!</h2>
-    <p class="text-[#eaf3ffcc] text-base md:text-lg">Ready to get started? Reach out on Discord to discuss your server setup!</p>
-    <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-4">
-      <a href="https://oguser.com/geigi" target="_blank"><img src="0x0.png" alt="OGU" class="w-20 rounded-xl shadow-lg"></a>
-      <a href="https://discord.com/users/463953200559685632" target="_blank"><img src="discord.png" alt="Discord" class="w-20 rounded-xl shadow-lg"></a>
-    </div>
-    <p class="mt-6 text-sm text-[#eaf3ff88]">&copy; 2025 DCServer.dev, All rights reserved.</p>
-  </section>
-
-</main>
-
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init({
-  once: true,
-  offset: 100,
-  duration: 1000
-});
-
-function scrollToPrices() {
-  document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
-}
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
 </html>
-
-
-
-
